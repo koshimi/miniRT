@@ -1,4 +1,4 @@
-#	Toggle line comment at line 89 ~ 90, 96 ~ 97 for fast-make (WILL NOT make lib_subdirs clean or fclean)
+#	Toggle line comment at line 90 ~ 91, 97 ~ 98 for fast-make (WILL NOT make lib_subdirs clean or fclean)
 #	If make error, miniRT.tmp should be deleted
 
 CC = cc
@@ -30,6 +30,7 @@ SRCS =	srcs/main.c \
 		srcs/rt/rt_dat/del_rt_dat.c \
 		srcs/rt/rt_color.c \
 		srcs/rt/types/types_utils.c \
+		srcs/rt/types/types_utils_2.c \
 		srcs/rt/types/types_vector3_double.c \
 		srcs/rt/types/types_vector3_double_base_op.c \
 		srcs/rt/types/types_vector3_double_product.c \
@@ -49,13 +50,19 @@ SRCS =	srcs/main.c \
 		srcs/rt/o_cylinder/new_cylinder.c \
 		srcs/rt/o_cylinder/del_cylinder.c \
 		srcs/rt/o_cylinder/is_hit_cylinder.c \
+		srcs/rt/o_cylinder/is_hit_cylinder_utils.c \
 		srcs/rt/linear_func/rotation.c \
 		srcs/rt/linear_func/linear_map.c \
 		srcs/rt/linear_func/linear_get_inverse_3x3.c \
 		srcs/rt/raytrace/ray.c \
 		srcs/rt/raytrace/ray_hit.c \
+		srcs/rt/render/render_process.c \
+		srcs/rt/render/phong_shading.c \
 		srcs/mlx/mlx_event/mlx_event_destroy.c \
-		srcs/mlx/mlx_event/mlx_event_keyup.c
+		srcs/mlx/mlx_event/mlx_event_keydown.c \
+		srcs/mlx/mlx_event/mlx_event_update.c \
+		srcs_bonus/mlx/mlx_event/mlx_event_keydown_bonus.c \
+		srcs_bonus/mlx/mlx_event/mlx_event_mouse_move_bonus.c
 
 OBJS = $(SRCS:%.c=%.o)
 
@@ -86,15 +93,15 @@ $(NAME).tmp : $(NAME_H) $(OBJS) $(LIBFT_DIR)/$(LIBFT) $(LIBFT_H) $(LIBMLX_H)
 
 clean :
 	rm -f $(OBJS)
-	make -C $(LIBFT_DIR) clean
-	make -C $(LIBMLX_DIR) clean
+#	make -C $(LIBFT_DIR) clean
+#	make -C $(LIBMLX_DIR) clean
 	rm -f mlx/mlx_mms/*.swiftsourceinfo
 
 fclean :
 	make clean
 	rm -f $(NAME)
-	make -C $(LIBFT_DIR) fclean
-	make -C $(LIBMLX_DIR) clean
+#	make -C $(LIBFT_DIR) fclean
+#	make -C $(LIBMLX_DIR) clean
 	rm -f $(LIBMLX_H)
 	rm -f $(LIBMLX)
 

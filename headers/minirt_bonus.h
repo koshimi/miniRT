@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del_rt_dat.c                                       :+:      :+:    :+:   */
+/*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moson <moson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 05:50:50 by moson             #+#    #+#             */
-/*   Updated: 2024/04/23 05:50:51 by moson            ###   ########.fr       */
+/*   Created: 2024/05/10 23:50:36 by moson             #+#    #+#             */
+/*   Updated: 2024/05/10 23:50:37 by moson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../headers/minirt.h"
+#ifndef MINIRT_BONUS_H
+# define MINIRT_BONUS_H
 
-void	del_rt_dat(t_rt_dat rt)
-{
-	int	cnt;
+# include "../headers/minirt.h"
 
-	ft_free((void **)&rt.my_mlx);
-	del_ambient(&rt.amb);
-	del_camera(&rt.cam);
-	del_lst(&rt.lit_list);
-	del_lst(&rt.obj_list);
-	cnt = -1;
-	while (++cnt < WIN_Y)
-	{
-		ft_free((void **)&rt.ray_buf[cnt]);
-		ft_free((void **)&rt.col_buf[cnt]);
-	}
-	ft_free((void **)&rt.ray_buf);
-	ft_free((void **)&rt.col_buf);
-}
+/*						PROTOTYPES						*/
+
+//	mlx_event_keydown_bonus.c
+
+int	mlx_event_keydown_bonus(int keycode, void *param);
+
+//	mlx_event_mouse_move_bonus.c
+
+int	mlx_event_mouse_move_bonus(int x, int y, void *param);
+
+/*						PROTOTYPES						*/
+
+#endif

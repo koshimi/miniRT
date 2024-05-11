@@ -21,11 +21,34 @@
 # include "../headers/rtstructs.h"
 # include "../headers/mlxstructs.h"
 
-# define WIN_X 640
-# define WIN_Y 480
+# define DOWNSCLX 10
+# define DOWNSCLY 10
+# define WIN_X 1920
+# define WIN_Y 1080
 
 # define WIN_NAME "miniRT"
 # define EPSILON 0.000001
+
+// # define DIFFUSE_CONST 0.6
+# define DIFFUSE_CONST 0.25
+# define SPECULAR_CONST 50
+# define SPECULAR_MAX_DIST 10
+
+# define KEY_ESC 53
+# define KEY_SPC 49
+# define KEY_Q 12
+# define KEY_W 13
+# define KEY_E 14
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_1 18
+# define KEY_2 19
+# define KEY_3 20
+# define KEY_4 21
+# define KEY_BACKQUOTE 50
+
+# define MOUSE_SENSIVITY 0.001
 
 /*						PROTOTYPES						*/
 
@@ -69,8 +92,11 @@ void				del_rt_dat(t_rt_dat rt);
 
 //	rt_color.c
 
-unsigned int		mlx_rt_color_to_uint(t_rt_color color);
+t_rt_color			rt_color_mult(t_rt_color col, double val);
+t_rt_color			rt_color_add(t_rt_color col, t_vector3_int add);
+t_rt_color			rt_no_hit_color(void);
 t_rt_color			rt_color(int r, int g, int b, double a);
+unsigned int		mlx_rt_color_to_uint(t_rt_color color);
 
 //	types_utils.c
 
@@ -79,6 +105,12 @@ t_vector3_int		vector3_int(int x, int y, int z);
 t_vector3_double	vector3_double(double x, double y, double z);
 t_transform			transform(void);
 t_ray				ray(t_vector3_double origin, t_vector3_double dir);
+
+//	types_utils_2.c
+
+t_vector3_double	get_reflection_vector(t_vector3_double l, t_vector3_double norm);
+t_node				*get_node(t_lst *obj_list, int idx);
+t_o_info			*get_o_info(t_node *node);
 
 //	types_vector3_double.c
 
@@ -113,6 +145,7 @@ void				del_ambient(t_o_amb **ptr);
 
 //	new_camera.c
 
+void				set_cam_forward(t_o_info *info, t_vector3_double v);
 t_o_cam				*new_camera(const t_camera_input *input);
 
 //	del_camera.c
@@ -163,6 +196,11 @@ void				del_cylinder(t_o_cyl **ptr);
 
 t_hit				is_hit_cylinder(t_ray ray_world, const t_o_cyl *cyl, unsigned int obj_idx);
 
+//	rotation.c
+
+t_vector3_double	tr_rotate(const t_vector3_double *v, \
+					char axis, double sin_x, double cos_x);
+
 //	linear_map.c
 
 t_vector3_double	rt_linear_map( \
@@ -184,20 +222,30 @@ t_ray				get_local_ray(t_ray ray_world, t_transform local_tr);
 
 //	ray_hit.c
 
-t_hit				get_first_hit(t_rt_dat *rt, t_ray ray);
+t_hit				get_first_hit(t_rt_dat *rt, t_ray ray, int skip_idx);
+int					has_shadow(t_rt_dat *rt, t_vector3_double lit_pos, t_vector3_double hit_pos, int skip_idx);
 
-//	rotation.c
+//	render_process.c
 
-t_vector3_double	tr_rotate(const t_vector3_double *v, \
-					char axis, double sin_x, double cos_x);
+void				cast_ray_simple(t_rt_dat *rt);
+void				cast_ray(t_rt_dat *rt);
+void				rt_draw_col_buf(t_rt_dat *rt);
+
+//	phong_shading.c
+
+t_rt_color			apply_phong_shading(t_rt_dat *rt, int x, int y, double unit_dist);
 
 //	mlx_event_destroy.c
 
 int					mlx_event_destroy(void *param);
 
-//	mlx_event_keyup.c
+//	mlx_event_keydown.c
 
-int					mlx_event_keyup(int keycode, void *param);
+int					mlx_event_keydown(int keycode, void *param);
+
+//	mlx_event_update.c
+
+int					mlx_event_update(void *param);
 
 /*						PROTOTYPES						*/
 #endif

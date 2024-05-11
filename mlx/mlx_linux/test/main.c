@@ -131,7 +131,7 @@ int	main()
   if (!(im1 = mlx_new_image(mlx,IM1_SX,IM1_SY)))
     {
       printf(" !! KO !!\n");
-      (1);
+      exit(1);
     }
   data1 = mlx_get_data_addr(im1,&bpp1,&sl1,&endian1);
   printf("OK (bpp1: %d, sizeline1: %d endian: %d type: %d)\n",bpp1,sl1,endian1,

@@ -12,6 +12,8 @@
 
 #include "../../../headers/minirt.h"
 
+#include <stdio.h>
+
 static t_hit	get_hit_by_o_type(t_ray ray, t_node *node, int idx)
 {
 	t_hit	res;
@@ -39,21 +41,50 @@ static t_hit	get_closer_hit(t_hit h1, t_hit h2)
 		return (h2);
 }
 
-t_hit	get_first_hit(t_rt_dat *rt, t_ray ray)
+t_hit	get_first_hit(t_rt_dat *rt, t_ray ray, int skip_idx)
 {
 	int		idx;
 	t_node	*node;
 	t_hit	cur_hit;
 	t_hit	res_hit;
-	
+
 	res_hit.is_hit = 0;
+	res_hit.hit_obj_idx = -1;
 	idx = -1;
 	node = rt->obj_list->head;
 	while (++idx < rt->obj_list->size)
 	{
-		cur_hit = get_hit_by_o_type(ray, node, idx);
-		res_hit = get_closer_hit(cur_hit, res_hit);
+		if (idx != skip_idx)
+		{
+			cur_hit = get_hit_by_o_type(ray, node, idx);
+			res_hit = get_closer_hit(cur_hit, res_hit);
+		}
 		node = node->next;
 	}
 	return (res_hit);
+}
+
+int	has_shadow(t_rt_dat *rt, t_vector3_double lit_pos, t_vector3_double hit_pos, int skip_idx)
+{
+	t_hit	hit;
+	int		idx;
+	t_node	*node;
+	t_ray	ray_to_lit;
+	double	sqrmag_to_lit;
+
+	ray_to_lit = ray(hit_pos, vector3_sub(lit_pos, hit_pos));
+	sqrmag_to_lit = vector3_sqrmagnitude(vector3_sub(lit_pos, hit_pos));
+	hit.is_hit = 0;
+	hit.hit_obj_idx = -1;
+	idx = -1;
+	node = rt->obj_list->head;
+	while (++idx < rt->obj_list->size)
+	{
+		if (idx != skip_idx)
+			hit = get_hit_by_o_type(ray_to_lit, node, idx);
+		if ((hit.is_hit == 1) && (hit.sqrmag < sqrmag_to_lit))
+			return (1);
+		node = node->next;
+	}
+	return (0);
 }

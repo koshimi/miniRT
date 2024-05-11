@@ -22,18 +22,18 @@ t_vector3_double	tr_rotate(const t_vector3_double *v, \
 	res.z = v->z;
 	if (axis == 'x' || axis == 'X')
 	{
-		res.y = (int)(cos_x * v->y - sin_x * v->z);
-		res.z = (int)(sin_x * v->y + cos_x * v->z);
+		res.y = (cos_x * v->y - sin_x * v->z);
+		res.z = (sin_x * v->y + cos_x * v->z);
 	}
 	else if (axis == 'y' || axis == 'Y')
 	{
-		res.x = (int)(cos_x * v->x + sin_x * v->z);
-		res.z = (int)(cos_x * v->z - sin_x * v->x);
+		res.x = (cos_x * v->x + sin_x * v->z);
+		res.z = (cos_x * v->z - sin_x * v->x);
 	}
 	else if (axis == 'z' || axis == 'Z')
 	{
-		res.x = (int)(cos_x * v->x - sin_x * v->y);
-		res.y = (int)(sin_x * v->x + cos_x * v->y);
+		res.x = (cos_x * v->x - sin_x * v->y);
+		res.y = (sin_x * v->x + cos_x * v->y);
 	}
 	return (res);
 }

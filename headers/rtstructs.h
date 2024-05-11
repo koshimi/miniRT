@@ -156,20 +156,27 @@ struct s_node {
 	unsigned int	o_type;
 	struct s_node	*next;
 };
-
 struct s_lst {
 	int				size;
 	struct s_node	*head;
 };
-
 struct s_rt_dat {
-	struct s_mlx		*my_mlx;
+	struct s_mlx			*my_mlx;
 
-	struct s_o_ambient	*amb;
-	struct s_o_camera	*cam;
+	struct s_o_ambient		*amb;
+	struct s_o_camera		*cam;
 
-	struct s_lst		*lit_list;
-	struct s_lst		*obj_list;
+	struct s_lst			*lit_list;
+	struct s_lst			*obj_list;
+
+	struct s_ray			**ray_buf;
+	struct s_rt_color		**col_buf;
+
+	int						light_enable[3];
+	int						is_cam_mode;
+	int						is_updated;
+
+	struct s_vector2_int	mouse_pos;
 };
 
 //	typedefs
