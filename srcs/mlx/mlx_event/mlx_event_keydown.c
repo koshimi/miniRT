@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_list.c                                         :+:      :+:    :+:   */
+/*   mlx_event_keydown.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moson <moson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 05:23:20 by moson             #+#    #+#             */
-/*   Updated: 2024/04/23 05:23:21 by moson            ###   ########.fr       */
+/*   Created: 2024/05/08 22:39:27 by moson             #+#    #+#             */
+/*   Updated: 2024/05/08 22:39:28 by moson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minirt.h"
+#include "../../../headers/minirt.h"
 
-void	add_lst(t_lst *list, t_node	*node)
+int	mlx_event_keydown(int keycode, void *param)
 {
-	t_node	*last;
+	t_rt_dat	*rt;
 
-	if (node == NULL)
+	rt = param;
+	if (keycode == KEY_ESC)
 	{
-		ft_printf("Error\n");
-		exit(1);
+		mlx_destroy_window(rt->my_mlx->mlx, rt->my_mlx->mlx_win);
+		mlx_event_destroy(NULL);
 	}
-	if (list->head == NULL)
-		list->head = node;
-	else
+	else if (keycode == KEY_SPC)
 	{
-		last = list->head;
-		while (last->next != NULL)
-			last = last->next;
-		last->next = node;
+		mlx_mouse_show();
+		rt->is_cam_mode = 0;
+		rt->is_updated = 2;
 	}
-	list->size++;
+	return (0);
 }

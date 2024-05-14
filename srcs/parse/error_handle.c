@@ -6,11 +6,11 @@
 /*   By: chanhcho <chanhcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 03:02:47 by chanhcho          #+#    #+#             */
-/*   Updated: 2024/05/11 03:03:40 by chanhcho         ###   ########.fr       */
+/*   Updated: 2024/05/14 10:41:44 by chanhcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "../../headers/parse.h"
 
 void	check_misconfig(char *str)
 {
@@ -22,8 +22,7 @@ void	check_misconfig(char *str)
 	}
 }
 
-
-int check_symbol(char c, char *symbol)
+int	check_symbol(char c, char *symbol)
 {
 	if (c == 0)
 		return (1);
@@ -36,7 +35,7 @@ int check_symbol(char c, char *symbol)
 	return (0);
 }
 
-void	parse_error()
+void	parse_error(void)
 {
 	ft_putendl_fd("Error", 1);
 	ft_putendl_fd("misconfiguration in *.rt file", 1);

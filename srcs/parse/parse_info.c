@@ -6,21 +6,22 @@
 /*   By: chanhcho <chanhcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 03:06:44 by chanhcho          #+#    #+#             */
-/*   Updated: 2024/05/11 03:08:20 by chanhcho         ###   ########.fr       */
+/*   Updated: 2024/05/14 13:59:12 by chanhcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
-
+#include "../../headers/parse.h"
 
 void	parse_coordinate(char **str, t_vector3_double *pos)
 {
 	pos->x = ft_atod(str, ",");
+	clip_double(-MAX_WORLD_SIZE, MAX_WORLD_SIZE, &pos->x);
 	pos->y = ft_atod(str, ",");
+	clip_double(-MAX_WORLD_SIZE, MAX_WORLD_SIZE, &pos->y);
 	pos->z = ft_atod(str, " \t");
+	clip_double(-MAX_WORLD_SIZE, MAX_WORLD_SIZE, &pos->z);
 	next_info(str);
 }
-
 
 void	seperate_color(char **str, int *color, char *symbol)
 {
@@ -53,7 +54,6 @@ void	parse_color(char **str, t_rt_color *color)
 	while (**str && check_symbol(**str, "\t \n"))
 		++*str;
 }
-
 
 void	parse_forward(char **str, t_vector3_double *forward)
 {

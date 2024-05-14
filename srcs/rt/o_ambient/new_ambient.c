@@ -15,7 +15,7 @@
 static void	set_o_info(t_o_info *info, const t_ambient_lighting_input *input)
 {
 	info->o_type = OTYPE_AMBIENT;
-	info->tr = transform();
+	info->tr = tr();
 	info->color = input->color;
 	return ;
 }

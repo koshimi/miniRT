@@ -12,7 +12,7 @@
 
 #include "../../../headers/minirt.h"
 
-double	vector3_dot(t_vector3_double a, t_vector3_double b)
+double	v3d_dot(t_vector3_double a, t_vector3_double b)
 {
 	double	res;
 
@@ -20,7 +20,7 @@ double	vector3_dot(t_vector3_double a, t_vector3_double b)
 	return (res);
 }
 
-t_vector3_double	vector3_cross(t_vector3_double a, t_vector3_double b)
+t_vector3_double	v3d_cross(t_vector3_double a, t_vector3_double b)
 {
 	t_vector3_double	res;
 

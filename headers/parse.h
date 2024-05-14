@@ -6,14 +6,14 @@
 /*   By: chanhcho <chanhcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 02:53:38 by chanhcho          #+#    #+#             */
-/*   Updated: 2024/05/11 03:19:19 by chanhcho         ###   ########.fr       */
+/*   Updated: 2024/05/12 12:20:15 by chanhcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 # include <fcntl.h>
-# include "../../headers/minirt.h"
+# include "../headers/minirt.h"
 
 typedef struct s_input
 {

@@ -12,7 +12,7 @@
 
 #include "../../../headers/minirt.h"
 
-t_mat_3x3_double	mat_3x3_double( \
+t_mat_3x3_double	mat_3x3_v3d( \
 	t_vector3_double x, t_vector3_double y, t_vector3_double z)
 {
 	t_mat_3x3_double	res;

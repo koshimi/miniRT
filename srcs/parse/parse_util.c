@@ -6,11 +6,11 @@
 /*   By: chanhcho <chanhcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 02:53:05 by chanhcho          #+#    #+#             */
-/*   Updated: 2024/05/11 03:07:04 by chanhcho         ###   ########.fr       */
+/*   Updated: 2024/05/14 11:38:47 by chanhcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "../../headers/parse.h"
 
 void	clip_double(double min, double max, double *result)
 {
@@ -61,7 +61,6 @@ void	next_info(char **str)
 
 void	get_identifier(char *ret, char *str)
 {
-	next_info(&str);
 	while (*str && *str != ' ' && *str != '\t' && *ret)
 	{
 		*ret = *str;

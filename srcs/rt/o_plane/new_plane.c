@@ -16,22 +16,21 @@ static void	set_o_info(t_o_info *info, const t_plane_input *input)
 {
 	info->o_type = OTYPE_PLANE;
 	info->tr.position = input->position;
-	if (is_null_vector3(input->forward))
+	if (is_null_v3d(input->forward))
 	{
-		//	TODO: error detected
-		ft_printf("ERROR DETECT: Plane orientation vector is 0\n");
+		ft_printf("Error\n");
 		exit(1);
 	}
-	info->tr.forward[AXIS_Z] = vector3_normalized(input->forward);
-	if (is_axis_vector3(info->tr.forward[AXIS_Z]) == 'y')
-		info->tr.forward[AXIS_X] = vector3_normalized(vector3_cross \
-			(vector3_double(0.0, 0.0, 1.0), info->tr.forward[AXIS_Z]));
+	info->tr.forward[AXIS_Z] = v3d_norm(input->forward);
+	if (is_axis_v3d(info->tr.forward[AXIS_Z]) == 'y')
+		info->tr.forward[AXIS_X] = v3d_norm(v3d_cross \
+			(v3d(0.0, 0.0, 1.0), info->tr.forward[AXIS_Z]));
 	else
-		info->tr.forward[AXIS_X] = vector3_normalized(vector3_cross \
-			(vector3_double(0.0, 1.0, 0.0), info->tr.forward[AXIS_Z]));
-	info->tr.forward[AXIS_Y] = vector3_normalized(vector3_cross \
+		info->tr.forward[AXIS_X] = v3d_norm(v3d_cross \
+			(v3d(0.0, 1.0, 0.0), info->tr.forward[AXIS_Z]));
+	info->tr.forward[AXIS_Y] = v3d_norm(v3d_cross \
 		(info->tr.forward[AXIS_Z], info->tr.forward[AXIS_X]));
-	info->tr.scale = vector3_double(1.0, 1.0, 1.0);
+	info->tr.scale = v3d(1.0, 1.0, 1.0);
 	info->color = input->color;
 	return ;
 }

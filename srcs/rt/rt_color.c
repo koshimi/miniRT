@@ -12,6 +12,51 @@
 
 #include "../../headers/minirt.h"
 
+t_rt_color	rt_col_mult(t_rt_color col, double val)
+{
+	col.r *= val;
+	col.g *= val;
+	col.b *= val;
+	if (col.r < 0)
+		col.r = 0;
+	else if (255 < col.r)
+		col.r = 255;
+	if (col.g < 0)
+		col.g = 0;
+	else if (255 < col.g)
+		col.g = 255;
+	if (col.b < 0)
+		col.b = 0;
+	else if (255 < col.b)
+		col.b = 255;
+	return (col);
+}
+
+t_rt_color	rt_col_add(t_rt_color col, t_vector3_int add)
+{
+	col.r += add.x;
+	col.g += add.y;
+	col.b += add.z;
+	if (col.r < 0)
+		col.r = 0;
+	else if (255 < col.r)
+		col.r = 255;
+	if (col.g < 0)
+		col.g = 0;
+	else if (255 < col.g)
+		col.g = 255;
+	if (col.b < 0)
+		col.b = 0;
+	else if (255 < col.b)
+		col.b = 255;
+	return (col);
+}
+
+t_rt_color	rt_no_hit_col(void)
+{
+	return (rt_color(0, 0, 0, 0.0));
+}
+
 //	Error color = Magenta(255, 0, 255, 0.0);
 t_rt_color	rt_color(int r, int g, int b, double a)
 {

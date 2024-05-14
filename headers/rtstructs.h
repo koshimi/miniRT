@@ -71,7 +71,7 @@ struct s_hit {
 	struct s_vector3_double	point;
 	struct s_vector3_double	hit_normal;
 	double					sqrmag;
-	unsigned int			hit_obj_idx;
+	unsigned int			hit_idx;
 };
 
 //	*.rt input formats
@@ -156,20 +156,27 @@ struct s_node {
 	unsigned int	o_type;
 	struct s_node	*next;
 };
-
 struct s_lst {
 	int				size;
 	struct s_node	*head;
 };
-
 struct s_rt_dat {
-	struct s_mlx		*my_mlx;
+	struct s_mlx			*my_mlx;
 
-	struct s_o_ambient	*amb;
-	struct s_o_camera	*cam;
+	struct s_o_ambient		*amb;
+	struct s_o_camera		*cam;
 
-	struct s_lst		*lit_list;
-	struct s_lst		*obj_list;
+	struct s_lst			*lit_list;
+	struct s_lst			*obj_list;
+
+	struct s_ray			**ray_buf;
+	struct s_rt_color		**col_buf;
+
+	int						light_enable[3];
+	int						is_cam_mode;
+	int						is_updated;
+
+	struct s_vector2_int	mouse_pos;
 };
 
 //	typedefs
@@ -204,7 +211,7 @@ typedef struct s_ray						t_ray;
 //	point		[s_vector3_double]
 //	hit_normal	[s_vector3_double]
 //	sqrmag		[double]
-//	hit_obj_idx	[unsigned int]
+//	hit_idx	[unsigned int]
 typedef struct s_hit						t_hit;
 //	ratio		[0.0, 1.0]
 //	color		[0, 255]

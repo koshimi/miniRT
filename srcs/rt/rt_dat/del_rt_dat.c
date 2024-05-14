@@ -14,9 +14,19 @@
 
 void	del_rt_dat(t_rt_dat rt)
 {
+	int	cnt;
+
 	ft_free((void **)&rt.my_mlx);
 	del_ambient(&rt.amb);
 	del_camera(&rt.cam);
 	del_lst(&rt.lit_list);
 	del_lst(&rt.obj_list);
+	cnt = -1;
+	while (++cnt < WIN_Y)
+	{
+		ft_free((void **)&rt.ray_buf[cnt]);
+		ft_free((void **)&rt.col_buf[cnt]);
+	}
+	ft_free((void **)&rt.ray_buf);
+	ft_free((void **)&rt.col_buf);
 }

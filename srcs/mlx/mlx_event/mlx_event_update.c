@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_event_keyup.c                                  :+:      :+:    :+:   */
+/*   mlx_event_update.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moson <moson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/04 09:16:18 by moson             #+#    #+#             */
-/*   Updated: 2024/04/04 09:16:19 by moson            ###   ########.fr       */
+/*   Created: 2024/05/10 23:52:57 by moson             #+#    #+#             */
+/*   Updated: 2024/05/10 23:52:58 by moson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minirt.h"
 
-int	mlx_event_keyup(int keycode, void *param)
+int	mlx_event_update(void *param)
 {
-	t_mlx	*my_mlx;
+	t_rt_dat	*rt;
 
-	my_mlx = param;
-	if (keycode == 53)
+	rt = param;
+	if (rt->is_updated == 1)
 	{
-		mlx_destroy_window(my_mlx->mlx, my_mlx->mlx_win);
-		mlx_event_destroy(NULL);
+		cast_ray_simple(rt);
+		rt_draw_col_buf(rt);
+		mlx_put_image_to_window(\
+			rt->my_mlx->mlx, rt->my_mlx->mlx_win, rt->my_mlx->img.img, 0, 0);
+		rt->is_updated = 0;
+	}
+	else if (rt->is_updated == 2)
+	{
+		cast_ray(rt);
+		rt_draw_col_buf(rt);
+		mlx_put_image_to_window(\
+			rt->my_mlx->mlx, rt->my_mlx->mlx_win, rt->my_mlx->img.img, 0, 0);
+		rt->is_updated = 0;
 	}
 	return (0);
 }

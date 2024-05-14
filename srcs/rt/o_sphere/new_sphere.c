@@ -15,7 +15,7 @@
 static void	set_o_info(t_o_info *info, const t_sphere_input *input)
 {
 	info->o_type = OTYPE_SPHERE;
-	info->tr = transform();
+	info->tr = tr();
 	info->tr.position = input->position;
 	info->color = input->color;
 	return ;

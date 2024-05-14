@@ -6,13 +6,11 @@
 /*   By: chanhcho <chanhcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 02:48:28 by chanhcho          #+#    #+#             */
-/*   Updated: 2024/05/11 03:19:10 by chanhcho         ###   ########.fr       */
+/*   Updated: 2024/05/14 11:47:25 by chanhcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include "../../headers/minirt.h"
-#include "parse.h"
+#include "../../headers/parse.h"
 
 void	init_variable(double *sign, double *ret, int *decimal, char **str)
 {
@@ -29,6 +27,13 @@ void	init_variable(double *sign, double *ret, int *decimal, char **str)
 	}
 }
 
+char	*rid_white_space(char *str)
+{
+	while (*str && (*str == '\n' || *str == ' ' || *str == '\t'))
+		++str;
+	return (str);
+}
+
 t_input	*parse(char *filename)
 {
 	int		size;
@@ -42,10 +47,11 @@ t_input	*parse(char *filename)
 	input = malloc(sizeof(t_input));
 	if (!buf || !input)
 		exit(1);
-	pt = buf;
+	buf[size - 1] = 0;
 	fd = open(filename, O_RDONLY);
 	read(fd, buf, size);
 	size = 0;
+	pt = rid_white_space(buf);
 	while (pt)
 		pt = is_identifier(pt, &size, input);
 	if ((size & 0b111) != 0b111)

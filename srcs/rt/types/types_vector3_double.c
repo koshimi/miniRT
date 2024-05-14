@@ -12,30 +12,30 @@
 
 #include "../../../headers/minirt.h"
 
-double	vector3_sqrmagnitude(t_vector3_double v)
+double	v3d_sqrmag(t_vector3_double v)
 {
 	return (pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2));
 }
 
-double	vector3_magnitude(t_vector3_double v)
+double	v3d_mag(t_vector3_double v)
 {
-	return (sqrt(vector3_sqrmagnitude(v)));
+	return (sqrt(v3d_sqrmag(v)));
 }
 
-t_vector3_double	vector3_normalized(t_vector3_double v)
+t_vector3_double	v3d_norm(t_vector3_double v)
 {
 	double				mag;
 
-	mag = vector3_magnitude(v);
+	mag = v3d_mag(v);
 	if (mag == 0.0)
-		return (vector3_double(v.x, v.y, v.z));
+		return (v3d(v.x, v.y, v.z));
 	else
-		return (vector3_double(v.x / mag, v.y / mag, v.z / mag));
+		return (v3d(v.x / mag, v.y / mag, v.z / mag));
 }
 
-int	is_null_vector3(t_vector3_double v)
+int	is_null_v3d(t_vector3_double v)
 {
-	if (vector3_sqrmagnitude(v) == 0.0)
+	if (v3d_sqrmag(v) == 0.0)
 		return (1);
 	else
 		return (0);
@@ -43,7 +43,7 @@ int	is_null_vector3(t_vector3_double v)
 
 //	If v is axis-vector, return ['x', 'y', 'z']
 //	else return 0
-char	is_axis_vector3(t_vector3_double v)
+char	is_axis_v3d(t_vector3_double v)
 {
 	if (v.x == 0.0 && v.y == 0.0 && v.z != 0.0)
 		return ('z');

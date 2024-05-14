@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_list.c                                         :+:      :+:    :+:   */
+/*   minirt_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moson <moson@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 05:23:20 by moson             #+#    #+#             */
-/*   Updated: 2024/04/23 05:23:21 by moson            ###   ########.fr       */
+/*   Created: 2024/05/10 23:50:36 by moson             #+#    #+#             */
+/*   Updated: 2024/05/10 23:50:37 by moson            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minirt.h"
+#ifndef MINIRT_BONUS_H
+# define MINIRT_BONUS_H
 
-void	add_lst(t_lst *list, t_node	*node)
-{
-	t_node	*last;
+# include "../headers/minirt.h"
 
-	if (node == NULL)
-	{
-		ft_printf("Error\n");
-		exit(1);
-	}
-	if (list->head == NULL)
-		list->head = node;
-	else
-	{
-		last = list->head;
-		while (last->next != NULL)
-			last = last->next;
-		last->next = node;
-	}
-	list->size++;
-}
+/*						PROTOTYPES						*/
+
+//	mlx_event_keydown_bonus.c
+
+int	mlx_event_keydown_bonus(int keycode, void *param);
+
+//	mlx_event_mouse_move_bonus.c
+
+int	mlx_event_mouse_move_bonus(int x, int y, void *param);
+
+/*						PROTOTYPES						*/
+
+#endif

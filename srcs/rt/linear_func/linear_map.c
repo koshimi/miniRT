@@ -17,9 +17,9 @@ t_vector3_double	rt_linear_map( \
 {
 	t_vector3_double	res;
 
-	res.x = vector3_dot(v, base.forward[AXIS_X]);
-	res.y = vector3_dot(v, base.forward[AXIS_Y]);
-	res.z = vector3_dot(v, base.forward[AXIS_Z]);
+	res.x = v3d_dot(v, base.forward[AXIS_X]);
+	res.y = v3d_dot(v, base.forward[AXIS_Y]);
+	res.z = v3d_dot(v, base.forward[AXIS_Z]);
 	return (res);
 }
 
@@ -29,7 +29,7 @@ t_vector3_double	rt_rlinear_map( \
 	t_mat_3x3_double	i_mat;
 	t_vector3_double	res;
 
-	i_mat = mat_3x3_inverse(mat_3x3_double \
+	i_mat = mat_3x3_inverse(mat_3x3_v3d \
 		(base.forward[AXIS_X], base.forward[AXIS_Y], base.forward[AXIS_Z]));
 	res.x = i_mat.a[0][0] * v.x + i_mat.a[0][1] * v.y + i_mat.a[0][2] * v.z;
 	res.y = i_mat.a[1][0] * v.x + i_mat.a[1][1] * v.y + i_mat.a[1][2] * v.z;
