@@ -6,7 +6,7 @@
 /*   By: chanhcho <chanhcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 05:32:58 by moson             #+#    #+#             */
-/*   Updated: 2024/05/14 16:11:00 by chanhcho         ###   ########.fr       */
+/*   Updated: 2024/05/14 21:32:16 by chanhcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 # include <stdlib.h>
 # include <math.h>
-
 # include "../Libft/libft.h"
 # include "../mlx/mlx.h"
 # include "../headers/rtstructs.h"
 # include "../headers/mlxstructs.h"
 
+# define BONUS_FLAG 1024
 # define DWNX 30
 # define DWNY 30
 # define WIN_X 1920
@@ -85,7 +85,7 @@ void				mlx_draw_black_screen(t_mlx *my_mlx);
 
 //	new_rt_dat.c
 
-t_rt_dat			new_rt_dat(char *filename);
+t_rt_dat			new_rt_dat(char *filename, int *table);
 
 //	del_rt_dat.c
 

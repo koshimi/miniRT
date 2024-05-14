@@ -6,7 +6,7 @@
 /*   By: chanhcho <chanhcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 02:48:28 by chanhcho          #+#    #+#             */
-/*   Updated: 2024/05/14 11:47:25 by chanhcho         ###   ########.fr       */
+/*   Updated: 2024/05/14 21:31:59 by chanhcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,17 @@ char	*rid_white_space(char *str)
 	return (str);
 }
 
-t_input	*parse(char *filename)
+char	*comment(char *str)
+{
+	while (*str && *str != '\n')
+		++str;
+	if (*str)
+		++str;
+	next_info(&str);
+	return (str);
+}
+
+t_input	*parse(t_rt_dat *rt, char *filename, int *table)
 {
 	int		size;
 	int		fd;
@@ -50,11 +60,10 @@ t_input	*parse(char *filename)
 	buf[size - 1] = 0;
 	fd = open(filename, O_RDONLY);
 	read(fd, buf, size);
-	size = 0;
 	pt = rid_white_space(buf);
 	while (pt)
-		pt = is_identifier(pt, &size, input);
-	if ((size & 0b111) != 0b111)
+		pt = is_identifier(rt, pt, table, input);
+	if ((*table & 0b111) != 0b111)
 		parse_error();
 	close(fd);
 	free(buf);

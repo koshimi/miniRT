@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moson <moson@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: chanhcho <chanhcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:46:30 by moson             #+#    #+#             */
-/*   Updated: 2024/05/13 18:46:31 by moson            ###   ########.fr       */
+/*   Updated: 2024/05/14 21:21:13 by chanhcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,16 @@ int	main(int argc, char **argv)
 {
 	t_rt_dat	rt;
 	int			ret;
+	int			table;
 
+	table = 0;
+	table |= BONUS_FLAG;
 	if (argc != 2)
 	{
 		ft_putendl_fd("Error", 1);
 		exit(1);
 	}
-	rt = new_rt_dat(argv[1]);
+	rt = new_rt_dat(argv[1], &table);
 	ret = rt_main_bonus(rt);
 	del_rt_dat(rt);
 	return (ret);

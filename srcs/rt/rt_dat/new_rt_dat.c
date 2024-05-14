@@ -6,7 +6,7 @@
 /*   By: chanhcho <chanhcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 05:50:44 by moson             #+#    #+#             */
-/*   Updated: 2024/05/12 12:44:49 by chanhcho         ###   ########.fr       */
+/*   Updated: 2024/05/14 21:27:05 by chanhcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,34 +58,7 @@ static int	init_rt_dat(t_rt_dat *rt)
 	return (1);
 }
 
-static t_rt_dat	set_rt_dat(t_rt_dat rt, t_input *input)
-{
-	void	*item;
-
-	rt.amb = new_ambient(&input->amb);
-	rt.cam = new_camera(&input->cam);
-	item = (void *)new_light(&input->lit);
-	if (item == NULL)
-		exit(1);
-	add_lst(rt.lit_list, new_node(item, OTYPE_LIGHT));
-	item = (void *)new_sphere(&input->sph);
-	if (item == NULL)
-		exit(1);
-	add_lst(rt.obj_list, new_node(item, OTYPE_SPHERE));
-	item = (void *)new_plane(&input->pl);
-	if (item == NULL)
-		exit(1);
-	add_lst(rt.obj_list, new_node(item, OTYPE_PLANE));
-	item = (void *)new_cylinder(&input->cyl);
-	if (item == NULL)
-		exit(1);
-	add_lst(rt.obj_list, new_node(item, OTYPE_CYLINDER));
-	if (rt.amb == NULL || rt.cam == NULL)
-		exit(1);
-	return (rt);
-}
-
-t_rt_dat	new_rt_dat(char *filename)
+t_rt_dat	new_rt_dat(char *filename, int *table)
 {
 	t_rt_dat	rt;
 	t_input		*input;
@@ -95,8 +68,7 @@ t_rt_dat	new_rt_dat(char *filename)
 		ft_printf("Error\n");
 		exit(1);
 	}
-	input = parse(filename);
-	rt = set_rt_dat(rt, input);
+	input = parse(&rt, filename, table);
 	free(input);
 	return (rt);
 }

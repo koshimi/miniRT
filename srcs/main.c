@@ -6,7 +6,7 @@
 /*   By: chanhcho <chanhcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 02:53:17 by moson             #+#    #+#             */
-/*   Updated: 2024/05/12 12:45:09 by chanhcho         ###   ########.fr       */
+/*   Updated: 2024/05/14 21:22:43 by chanhcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@ int	main(int argc, char **argv)
 {
 	t_rt_dat	rt;
 	int			ret;
+	int			table;
 
+	table = 0;
 	if (argc != 2)
 	{
 		ft_putendl_fd("Error", 1);
 		exit(1);
 	}
-	rt = new_rt_dat(argv[1]);
+	rt = new_rt_dat(argv[1], &table);
 	ret = rt_main(rt);
 	del_rt_dat(rt);
 	return (ret);

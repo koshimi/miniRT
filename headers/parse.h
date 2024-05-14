@@ -6,7 +6,7 @@
 /*   By: chanhcho <chanhcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 02:53:38 by chanhcho          #+#    #+#             */
-/*   Updated: 2024/05/12 12:20:15 by chanhcho         ###   ########.fr       */
+/*   Updated: 2024/05/14 21:27:14 by chanhcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ typedef struct s_input
 	t_cylinder_input			cyl;
 }	t_input;
 
-char	*parse_amb(char *str, int *table, t_input *input);
-char	*parse_light(char *str, int *table, t_input *input);
-char	*parse_camera(char *str, int *table, t_input *input);
-char	*parse_plane(char *str, int *table, t_input *input);
-char	*parse_sphere(char *str, int *table, t_input *input);
-char	*parse_cylinder(char *str, int *table, t_input *input);
+char	*parse_amb(t_rt_dat *rt, char *str, int *table, t_input *input);
+char	*parse_light(t_rt_dat *rt, char *str, int *table, t_input *input);
+char	*parse_camera(t_rt_dat *rt, char *str, int *table, t_input *input);
+char	*parse_plane(t_rt_dat *rt, char *str, int *table, t_input *input);
+char	*parse_sphere(t_rt_dat *rt, char *str, int *table, t_input *input);
+char	*parse_cylinder(t_rt_dat *rt, char *str, int *table, t_input *input);
 void	parse_coordinate(char **str, t_vector3_double *pos);
 void	check_misconfig(char *str);
 double	ft_atod(char **str, char *symbol);
@@ -47,8 +47,9 @@ int		check_filename(char *filename);
 void	check_misconfig(char *str);
 double	ft_atod(char **str, char *symbol);
 void	init_variable(double *sign, double *ret, int *decimal, char **str);
-char	*is_identifier(char *str, int *table, t_input *input);
+char	*is_identifier(t_rt_dat *rt, char *str, int *table, t_input *input);
 void	get_identifier(char *ret, char *str);
-t_input	*parse(char *filename);
+char	*comment(char *str);
+t_input	*parse(t_rt_dat *rt, char *filename, int *table);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: chanhcho <chanhcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 02:53:05 by chanhcho          #+#    #+#             */
-/*   Updated: 2024/05/14 11:38:47 by chanhcho         ###   ########.fr       */
+/*   Updated: 2024/05/14 20:32:30 by chanhcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	clip_int(int min, int max, int *color)
 		*color = max;
 }
 
-char	*is_identifier(char *str, int *table, t_input *input)
+char	*is_identifier(t_rt_dat *rt, char *str, int *table, t_input *input)
 {
 	char	id[3];
 
@@ -36,18 +36,20 @@ char	*is_identifier(char *str, int *table, t_input *input)
 	id[1] = 'b';
 	id[2] = 0;
 	get_identifier(id, str);
+	if (*id == '#')
+		return (comment(str));
 	if (ft_strncmp("A", id, 2) == 0)
-		return (parse_amb(str, table, input));
+		return (parse_amb(rt, str, table, input));
 	if (ft_strncmp("C", id, 2) == 0)
-		return (parse_camera(str, table, input));
+		return (parse_camera(rt, str, table, input));
 	if (ft_strncmp("L", id, 2) == 0)
-		return (parse_light(str, table, input));
+		return (parse_light(rt, str, table, input));
 	if (ft_strncmp("pl", id, 3) == 0)
-		return (parse_plane(str, table, input));
+		return (parse_plane(rt, str, table, input));
 	if (ft_strncmp("sp", id, 3) == 0)
-		return (parse_sphere(str, table, input));
+		return (parse_sphere(rt, str, table, input));
 	if (ft_strncmp("cy", id, 3) == 0)
-		return (parse_cylinder(str, table, input));
+		return (parse_cylinder(rt, str, table, input));
 	if (*str)
 		parse_error();
 	return (NULL);
