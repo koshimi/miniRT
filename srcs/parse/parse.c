@@ -6,7 +6,7 @@
 /*   By: chanhcho <chanhcho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 02:48:28 by chanhcho          #+#    #+#             */
-/*   Updated: 2024/05/14 21:31:59 by chanhcho         ###   ########.fr       */
+/*   Updated: 2024/05/16 22:01:34 by chanhcho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ char	*comment(char *str)
 		++str;
 	if (*str)
 		++str;
-	next_info(&str);
+	while (*str && check_symbol(*str, "\t \n"))
+		++str;
 	return (str);
 }
 
