@@ -105,7 +105,7 @@ t_rt_color	apply_phong_shading(t_rt_dat *rt, int x, int y, double unit_dist)
 	while (node != NULL)
 	{
 		lit = ((t_o_lit *)(node->item));
-		if (!has_shadow(rt, lit->o_info.tr.position, hit.point, hit.hit_idx))
+		if (!has_shadow(rt, lit->o_info.tr.position, hit.point))
 		{
 			col = rt_col_add(get_diffuse(rt, hit, lit), \
 								v3i(col.r, col.g, col.b));

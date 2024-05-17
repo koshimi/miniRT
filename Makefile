@@ -1,4 +1,4 @@
-#	Toggle line comment at line 124 ~ 125, 131 ~ 132 for fast-make (WILL NOT make lib_subdirs clean or fclean)
+#	Toggle line comment at line 126 ~ 127, 133 ~ 134 for fast-make (WILL NOT make lib_subdirs clean or fclean)
 #	If make error, miniRT.tmp should be deleted
 
 CC = cc

@@ -108,14 +108,14 @@ t_hit	is_hit_cylinder(\
 		t_ray ray_world, const t_o_cyl *cyl, unsigned int obj_idx)
 {
 	t_hit				hit;
-	t_ray				ray_local;
+	t_ray				lray;
 	t_vector3_double	point_local;
 	int					hit_idx;
 
 	hit.is_hit = 0;
-	ray_local = get_local_ray(ray_world, cyl->o_info.tr);
+	lray = get_local_ray(ray_world, cyl->o_info.tr);
 	hit.ray = ray_world;
-	hit_idx = get_point_idx(&point_local, ray_local, cyl->radius, cyl->height);
+	hit_idx = get_point_idx(&point_local, lray, cyl->radius, cyl->height);
 	if (hit_idx == -1)
 		return (hit);
 	hit.is_hit = 1;
@@ -126,6 +126,9 @@ t_hit	is_hit_cylinder(\
 	else
 		hit.hit_normal = v3d_norm(\
 			v3d_sub(point_local, v3d(0, point_local.y, 0)));
+	if ((-cyl->height < lray.origin.y && lray.origin.y < cyl->height) \
+	&& (pow(lray.origin.x, 2) + pow(lray.origin.z, 2) < pow(cyl->radius, 2)))
+		hit.hit_normal = v3d_smult(hit.hit_normal, -1);
 	hit.sqrmag = v3d_sqrmag(v3d_sub(hit.point, ray_world.origin));
 	hit.hit_idx = obj_idx;
 	return (hit);

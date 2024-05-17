@@ -230,7 +230,7 @@ t_ray				get_local_ray(t_ray ray_world, t_transform local_tr);
 
 t_hit				get_first_hit(t_rt_dat *rt, t_ray ray, int skip_idx);
 int					has_shadow(t_rt_dat *rt, t_vector3_double lit_pos, \
-								t_vector3_double hit_pos, int skip_idx);
+								t_vector3_double hit_pos);
 
 //	render_process.c
 

@@ -65,7 +65,7 @@ t_hit	get_first_hit(t_rt_dat *rt, t_ray ray, int skip_idx)
 }
 
 int	has_shadow(t_rt_dat *rt, t_vector3_double lit_pos, \
-				t_vector3_double hit_pos, int skip_idx)
+				t_vector3_double hit_pos)
 {
 	t_hit	hit;
 	int		idx;
@@ -74,6 +74,8 @@ int	has_shadow(t_rt_dat *rt, t_vector3_double lit_pos, \
 	double	sqrmag_to_lit;
 
 	ray_to_lit = ray(hit_pos, v3d_sub(lit_pos, hit_pos));
+	ray_to_lit.origin = v3d_add(ray_to_lit.origin, \
+						v3d_smult(ray_to_lit.dir, EPSILON));
 	sqrmag_to_lit = v3d_sqrmag(v3d_sub(lit_pos, hit_pos));
 	hit.is_hit = 0;
 	hit.hit_idx = -1;
@@ -81,8 +83,7 @@ int	has_shadow(t_rt_dat *rt, t_vector3_double lit_pos, \
 	node = rt->obj_list->head;
 	while (++idx < rt->obj_list->size)
 	{
-		if (idx != skip_idx)
-			hit = get_hit_by_o_type(ray_to_lit, node, idx);
+		hit = get_hit_by_o_type(ray_to_lit, node, idx);
 		if ((hit.is_hit == 1) && (hit.sqrmag < sqrmag_to_lit))
 			return (1);
 		node = node->next;

@@ -30,6 +30,8 @@ t_hit	is_hit_plane(t_ray ray_world, const t_o_pl *pl, unsigned int obj_idx)
 								ray_local.origin.y + t * ray_local.dir.y, 0);
 	hit.point = rt_ltow(point_local, pl->o_info.tr);
 	hit.hit_normal = pl->o_info.tr.forward[AXIS_Z];
+	if (ray_local.origin.z < 0)
+		hit.hit_normal = v3d_smult(hit.hit_normal, -1);
 	hit.sqrmag = v3d_sqrmag(v3d_sub(hit.point, ray_world.origin));
 	hit.hit_idx = obj_idx;
 	return (hit);

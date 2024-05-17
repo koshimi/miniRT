@@ -75,6 +75,9 @@ t_hit	is_hit_sphere(t_ray ray_world, const t_o_sph *sph, unsigned int obj_idx)
 	hit.point = rt_ltow(point_local, sph->o_info.tr);
 	hit.hit_normal = v3d_norm(v3d_sub \
 		(hit.point, rt_ltow(v3d(0, 0, 0), sph->o_info.tr)));
+	if (pow(ray_local.origin.x, 2) + pow(ray_local.origin.y, 2) \
+	+ pow(ray_local.origin.z, 2) < pow(sph->radius, 2))
+		hit.hit_normal = v3d_smult(hit.hit_normal, -1);
 	hit.sqrmag = v3d_sqrmag(v3d_sub(hit.point, ray_world.origin));
 	hit.hit_idx = obj_idx;
 	return (hit);
